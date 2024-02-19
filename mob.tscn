@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8h04dvkjte2x"]
+
+[ext_resource type="Script" path="res://Mob.gd" id="1_661x7"]
+[ext_resource type="Texture2D" uid="uid://b3uoe7p22ak71" path="res://enemy/crumpler/Sprite-0003.png" id="2_dk4ak"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k0pjh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_dk4ak")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_167vt"]
+size = Vector2(74, 68)
+
+[node name="Mob" type="RigidBody2D"]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_661x7")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_k0pjh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 6)
+shape = SubResource("RectangleShape2D_167vt")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-1, 6)
+scale = Vector2(3.7, 3.4)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
